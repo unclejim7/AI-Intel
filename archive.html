@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intel — Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #f5f0e8;
+    --paper: #0f0e0c;
+    --rule: #2a2520;
+    --accent: #c0392b;
+    --accent2: #4a90b8;
+    --muted: #8a8278;
+    --card: #1a1815;
+    --border: #2e2b27;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 15px;
+    min-height: 100vh;
+  }
+
+  .arch-nav {
+    background: #0a0908;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .arch-nav a { color: var(--accent2); text-decoration: none; }
+  .arch-nav a:hover { color: var(--ink); }
+
+  .arch-masthead {
+    text-align: center;
+    padding: 48px 24px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .arch-pub {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--ink);
+  }
+  .arch-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .arch-body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .month-group { margin-bottom: 40px; }
+  .month-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+
+  .edition-entry {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    margin-bottom: 8px;
+    gap: 20px;
+  }
+  .edition-entry:hover { border-color: var(--muted); }
+  .ed-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    flex: 0 0 auto;
+  }
+  .ed-day {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .ed-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    padding: 3px 8px;
+    flex: 0 0 auto;
+  }
+  .ed-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    flex: 1;
+  }
+  .ed-read {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    text-decoration: none;
+    border: 1px solid var(--accent2);
+    padding: 5px 14px;
+    flex: 0 0 auto;
+    transition: background 0.15s, color 0.15s;
+  }
+  .ed-read:hover { background: var(--accent2); color: var(--paper); }
+
+  .footer-arch {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="arch-nav">
+  <a href="index.html">← Today's Edition</a>
+  <span style="color:var(--muted);">AI INTEL · ARCHIVE</span>
+  <span style="color:var(--muted);">Est. 2025</span>
+</div>
+
+<div class="arch-masthead">
+  <div class="arch-pub">AI INTEL</div>
+  <div class="arch-sub">Complete Edition Archive · AI × Accounting &amp; Finance Intelligence</div>
+</div>
+
+<div class="arch-body">
+
+  <!-- MAY 2026 -->
+  <div class="month-group">
+    <div class="month-label">May 2026</div>
+
+    <!-- Edition 2 — Latest -->
+    <div class="edition-entry">
+      <div>
+        <div class="ed-date">May 29, 2026</div>
+        <div class="ed-day">Friday</div>
+      </div>
+      <div class="ed-num">Edition No. 2</div>
+      <div class="ed-badge">Latest</div>
+      <a class="ed-read" href="2026-05-29.html">Read →</a>
+    </div>
+
+    <!-- Edition 1 -->
+    <div class="edition-entry">
+      <div>
+        <div class="ed-date">May 28, 2026</div>
+        <div class="ed-day">Thursday</div>
+      </div>
+      <div class="ed-num">Edition No. 1</div>
+      <div></div>
+      <a class="ed-read" href="2026-05-28.html">Read →</a>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer-arch">
+  AI Intel · Est. 2025 · All editions AI-generated — verify before acting professionally.
+</div>
+
+</body>
+</html>

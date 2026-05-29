@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Intel — May 29, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f0e8;
+    --aged: #e8e0cc;
+    --rule: #2a2520;
+    --accent: #8b1a1a;
+    --accent2: #1a3d5c;
+    --muted: #6b6258;
+    --col-bg: #f0ead8;
+    --tag-bg: #2a2520;
+    --tag-fg: #f5f0e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV BAR */
+  .edition-nav {
+    background: var(--rule);
+    color: var(--tag-fg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+  .edition-nav a { color: #c8bfa8; text-decoration: none; border-bottom: 1px solid #6b6258; padding-bottom: 1px; }
+  .edition-nav a:hover { color: #f5f0e8; border-color: #f5f0e8; }
+  .edition-nav .nav-disabled { color: #4a4540; cursor: default; }
+  .edition-nav .nav-center a { color: #a89f8a; }
+
+  /* MASTHEAD */
+  .masthead {
+    border-bottom: 4px double var(--rule);
+    padding: 32px 40px 20px;
+    text-align: center;
+    background: var(--paper);
+    position: relative;
+  }
+  .masthead::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: var(--rule);
+    margin-bottom: 24px;
+  }
+  .pub-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+    color: var(--rule);
+  }
+  .pub-tagline {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+  }
+  .pub-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  .pub-meta span { display: inline-flex; align-items: center; gap: 8px; }
+  .pub-meta span::before, .pub-meta span::after { content: '·'; color: var(--accent); }
+  .pub-meta span:first-child::before { display: none; }
+  .pub-meta span:last-child::after { display: none; }
+
+  /* SECTION RULES */
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 0;
+  }
+  .section-rule.thick { border-top-width: 3px; }
+  .section-rule.double { border-top: 3px double var(--rule); }
+
+  /* MAIN LAYOUT */
+  .broadsheet {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* SECTION HEADERS */
+  .section-head {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--tag-fg);
+    background: var(--tag-bg);
+    display: inline-block;
+    padding: 4px 10px;
+    margin-bottom: 0;
+  }
+  .section-wrap {
+    border-top: 3px solid var(--rule);
+    padding-top: 20px;
+    margin-top: 32px;
+  }
+
+  /* ABOVE THE FOLD */
+  .lead-story {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 28px;
+  }
+  .lead-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .lead-headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--rule);
+    margin-bottom: 16px;
+    max-width: 820px;
+  }
+  .lead-body {
+    max-width: 760px;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .reporters-take {
+    margin-top: 18px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--accent);
+    background: var(--col-bg);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+    max-width: 720px;
+  }
+  .reporters-take strong {
+    font-style: normal;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* HEADLINES */
+  .headlines-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .headline-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--aged);
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .headline-item:last-child { border-bottom: none; }
+  .hl-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+  .hl-label span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    margin-bottom: 6px;
+  }
+  .hl-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.3;
+    color: var(--rule);
+    margin-bottom: 5px;
+  }
+  .hl-body { font-size: 13.5px; line-height: 1.65; color: var(--ink); }
+  .hl-why {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .hl-source {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+
+  /* TWO COLUMN */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 32px;
+  }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* TOOL SPOTLIGHT */
+  .tool-card {
+    background: var(--col-bg);
+    border: 1px solid var(--rule);
+    padding: 24px 28px;
+  }
+  .tool-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--rule);
+    line-height: 1.1;
+  }
+  .tool-by {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-top: 3px;
+    margin-bottom: 16px;
+  }
+  .tool-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 8px 14px;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    align-items: start;
+  }
+  .tool-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 2px;
+  }
+  .verdict-line {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--accent);
+    border-top: 1px solid var(--rule);
+    margin-top: 14px;
+    padding-top: 12px;
+  }
+  .tool-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent2);
+    margin-top: 10px;
+    display: inline-block;
+  }
+
+  /* AGENTIC CORNER */
+  .agentic-card {
+    background: var(--rule);
+    color: var(--tag-fg);
+    padding: 24px 28px;
+    border: 1px solid var(--rule);
+  }
+  .agentic-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: #f5f0e8;
+  }
+  .agentic-body { font-size: 13.5px; line-height: 1.65; color: #c8bfa8; }
+  .agentic-strategic {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: rgba(255,255,255,0.05);
+    font-style: italic;
+    font-size: 13px;
+    color: #e8dfc8;
+  }
+  .agentic-strategic strong {
+    font-style: normal;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* REGULATORY RADAR */
+  .reg-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--aged);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .reg-item:last-child { border-bottom: none; }
+  .reg-agency {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .reg-topic { font-weight: 700; color: var(--rule); }
+
+  /* RESOURCE */
+  .resource-box {
+    border: 1px solid var(--rule);
+    padding: 20px 24px;
+    background: var(--col-bg);
+  }
+  .resource-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--rule);
+    margin-bottom: 4px;
+  }
+  .resource-type {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .resource-body { font-size: 13.5px; line-height: 1.65; }
+  .resource-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent2);
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  /* DISPATCH */
+  .dispatch-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--aged);
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .dispatch-item:last-child { border-bottom: none; }
+  .dispatch-em { color: var(--accent); font-family: 'Playfair Display', serif; font-size: 20px; line-height: 1.2; font-style: italic; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 4px double var(--rule);
+    margin-top: 48px;
+    padding: 20px 40px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--paper);
+  }
+  .footer strong { color: var(--rule); font-weight: 600; }
+
+  a { color: inherit; }
+  b, strong { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- EDITION NAV -->
+<div class="edition-nav">
+  <div class="nav-left">
+    <a href="2026-05-28.html">← May 28</a>
+  </div>
+  <div class="nav-center">
+    <a href="archive.html">📁 Archive</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-disabled">May 30 →</span>
+  </div>
+</div>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="pub-name">AI INTEL</div>
+  <div class="pub-tagline">"All the intelligence that's fit to print."</div>
+  <div class="pub-meta">
+    <span>Edition No. 2</span>
+    <span>Friday, May 29, 2026</span>
+    <span>AI × Accounting &amp; Finance</span>
+    <span>Est. 2025</span>
+  </div>
+</header>
+
+<div class="broadsheet">
+
+  <!-- ABOVE THE FOLD -->
+  <div class="section-wrap">
+    <span class="section-head">◼ Above the Fold — Lead Story</span>
+    <div class="lead-story" style="margin-top:20px;">
+      <div class="lead-kicker">Thomson Reuters · May 27, 2026</div>
+      <div class="lead-headline">THOMSON REUTERS DECLARES "FIDUCIARY-GRADE AI" THE NEW PROFESSIONAL STANDARD — AND BETS ITS PLATFORM ON IT</div>
+      <div class="lead-body">
+        On May 27, <strong>Thomson Reuters</strong> formally introduced the concept of <strong>Fiduciary-Grade AI™</strong> — a benchmark standard for AI deployed in professional environments where accuracy, accountability, and regulatory compliance are non-negotiable. The announcement defines three tiers of AI in the market: general-purpose productivity tools, professional-grade AI, and fiduciary-grade — the last of which Thomson Reuters claims only it can deliver, grounded in domain-specific authoritative content, transparent outputs, and purpose-built privacy safeguards. The declaration landed the same week Q1 2026 earnings showed <strong>Tax, Audit &amp; Accounting segment revenues up 10%</strong>, driven by CoCounsel Tax and Audit adoption, with the company reaffirming 7.5–8% organic full-year growth guidance. For practitioners, the message is unambiguous: the firm that owns <strong>UltraTax CS, SurePrep, SafeSend, and CoCounsel</strong> is staking its identity on being the only AI vendor whose outputs you can sign your name to.
+      </div>
+      <div class="reporters-take">
+        <strong>Reporter's Take</strong>
+        The "Fiduciary-Grade" framing is a deliberate moat-building move — if the profession adopts this language, Thomson Reuters writes the standard it happens to already meet, freezing out general-purpose AI competitors before they can close the accuracy gap.
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADLINES -->
+  <div class="section-wrap">
+    <span class="section-head">◼ Today's Headlines</span>
+    <div class="headlines-grid" style="margin-top:20px;">
+
+      <div class="headline-item">
+        <div class="hl-label"><span></span>OpenAI</div>
+        <div>
+          <div class="hl-headline">CHATGPT CONNECTS TO BANK ACCOUNTS VIA PLAID — WITH INTUIT INTEGRATION NEXT</div>
+          <div class="hl-body"><strong>OpenAI</strong> launched a personal finance preview for <strong>ChatGPT Pro</strong> subscribers on May 15, enabling users to link accounts from over 12,000 institutions through <strong>Plaid</strong>, with a financial dashboard covering portfolio performance, spending, subscriptions, and upcoming payments. The company confirmed <strong>Intuit support is coming next</strong> — which would allow ChatGPT to estimate the tax impact of stock sales and credit card approvals without leaving the chat window.</div>
+          <div class="hl-why"><em>Why it matters: When Intuit lands, ChatGPT gains a real-time tax-context layer. CPA firms should treat this as a client-expectation shift — clients will arrive at appointments having already asked ChatGPT questions about their tax position.</em></div>
+          <div class="hl-source">TechCrunch · American Banker · OpenAI.com</div>
+        </div>
+      </div>
+
+      <div class="headline-item">
+        <div class="hl-label"><span></span>IRS</div>
+        <div>
+          <div class="hl-headline">IRS RUNS 126 AI APPLICATIONS, COLLECTS 12% MORE ENFORCEMENT REVENUE WITH 25% FEWER STAFF</div>
+          <div class="hl-body">IRS CEO Frank Bisignano testified before the Senate Finance Committee that enforcement revenue rose <strong>12% in the first five months of FY2026</strong> despite a roughly 25% workforce reduction, attributing the gains to technology-driven productivity. A March 2026 GAO report confirmed the agency now operates <strong>126 active AI use cases</strong> — up from just 10 in August 2022 — covering audit selection, fraud detection, large partnership screening, and mid-market corporate return analysis.</div>
+          <div class="hl-why"><em>Why it matters: The IRS is increasingly capable of targeted enforcement at scale; document consistency and position defensibility on every return you sign now carries more weight, not less.</em></div>
+          <div class="hl-source">Greenback Tax Services · Olshan Law · GAO-26-107522</div>
+        </div>
+      </div>
+
+      <div class="headline-item">
+        <div class="hl-label"><span></span>Fieldguide</div>
+        <div>
+          <div class="hl-headline">FIELDGUIDE EARNS FIRST AIUC-1 CERTIFICATION FOR AGENTIC AI SAFETY IN AUDIT</div>
+          <div class="hl-body"><strong>Fieldguide</strong> became the first AI platform in the audit and advisory category to achieve <strong>AIUC-1 certification</strong> from the Artificial Intelligence Underwriting Company, meeting the world's reference standard for AI agent security, safety, and reliability. The San Francisco-based company — backed by Goldman Sachs Alternatives, Bessemer, and <strong>Thomson Reuters</strong> — now counts half of the Top 100 U.S. accounting firms as clients, including KPMG, RSM, Grant Thornton, and BDO, with a $700M valuation following its February $75M Series C.</div>
+          <div class="hl-why"><em>Why it matters: AIUC-1 is emerging as a trust signal the profession will demand from AI platforms — if you're building in audit/advisory, certification roadmaps should be in your product plans now.</em></div>
+          <div class="hl-source">GlobeNewswire · CPA Practice Advisor</div>
+        </div>
+      </div>
+
+      <div class="headline-item">
+        <div class="hl-label"><span></span>Thomson Reuters</div>
+        <div>
+          <div class="hl-headline">MAJOR ACCOUNTING FIRM SELECTS SUREPREP FOR AI-POWERED K-1 PROCESSING</div>
+          <div class="hl-body"><strong>Thomson Reuters</strong> announced that a leading accounting and consulting firm selected its <strong>SurePrep</strong> AI-powered K-1 processing technology to automate complex data extraction and streamline tax workflows. The announcement, flagged on the Thomson Reuters Institute on May 19, underscores the rapid commercialization of Schedule K-1 automation — one of the most labor-intensive data extraction workflows in partnership and S-corp tax practice.</div>
+          <div class="hl-why"><em>Why it matters: K-1 processing automation is a direct workflow displacement for 1065 and 1120-S practitioners; SurePrep's early mover position here is worth tracking if you're in partnership returns.</em></div>
+          <div class="hl-source">Thomson Reuters Institute</div>
+        </div>
+      </div>
+
+      <div class="headline-item">
+        <div class="hl-label"><span></span>Accounting Today</div>
+        <div>
+          <div class="hl-headline">SURVEY: INDIVIDUAL 1040 PREPARATION TOPS LIST OF TASKS SEEING LEAST HUMAN INVOLVEMENT BY YEAR-END</div>
+          <div class="hl-body">In <strong>Accounting Today's</strong> 2026 AI Thought Leaders survey, experts identified <strong>individual income tax return preparation</strong> as the task most likely to see substantially less human involvement in 2026 than 2025, with AI auto-mapping QuickBooks data to tax form line items and processing scanned documents at the core of the workflow shift. Firms with deeper tech integration are reportedly preparing <strong>55% more returns per preparer</strong> versus prior years without adding staff.</div>
+          <div class="hl-why"><em>Why it matters: The 1040 workflow is the first casualty of agentic AI in tax — practitioners who don't reposition toward review, advisory, and complex returns risk commoditization on their highest-volume service line.</em></div>
+          <div class="hl-source">Accounting Today · CPA Trendlines</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TWO COLUMN: TOOL SPOTLIGHT + AGENTIC CORNER -->
+  <div class="two-col">
+
+    <!-- TOOL SPOTLIGHT -->
+    <div>
+      <div class="section-wrap" style="margin-top:0; padding-top:20px;">
+        <span class="section-head">◼ Tool Spotlight</span>
+        <div class="tool-card" style="margin-top:16px;">
+          <div class="tool-name">SurePrep K-1 AI</div>
+          <div class="tool-by">By: Thomson Reuters</div>
+          <div class="tool-row">
+            <div class="tool-label">What it does</div>
+            <div>Automates extraction and classification of Schedule K-1 data from complex partnership, S-corp, trust, and estate returns — ingesting PDF K-1s, mapping line items to tax form inputs, normalizing data across varying formats, and generating review-ready output that feeds directly into UltraTax CS workflows.</div>
+          </div>
+          <div class="tool-row">
+            <div class="tool-label">Built for</div>
+            <div>CPA firms and accounting teams handling high volumes of partnership (1065), S-corp (1120-S), and trust (1041) returns with significant K-1 pass-through complexity.</div>
+          </div>
+          <div class="tool-row">
+            <div class="tool-label">CPA Use Case</div>
+            <div>A mid-size firm handling 200+ 1065 returns ingests all K-1 PDFs at once — SurePrep extracts and maps each line item, flags anomalies vs. prior year, and delivers categorized binders to preparer staff for review. Time per K-1 drops from ~45 minutes of manual entry to a 5-minute review cycle.</div>
+          </div>
+          <div class="tool-row">
+            <div class="tool-label">Pricing</div>
+            <div>Bundled with Thomson Reuters UltraTax CS suite; enterprise pricing available through TR account rep. Standalone pricing not publicly listed.</div>
+          </div>
+          <div class="tool-row">
+            <div class="tool-label">Integration</div>
+            <div>Native UltraTax CS, Checkpoint, SafeSend; Thomson Reuters ecosystem only.</div>
+          </div>
+          <div class="verdict-line">Verdict: If you're already on UltraTax CS and doing partnership or trust work, this is a no-brainer evaluation — K-1 processing is where hours go to die, and SurePrep directly attacks that.</div>
+          <a class="tool-link" href="https://tax.thomsonreuters.com/us/en/cs-professional-suite/sureprep" target="_blank">→ tax.thomsonreuters.com/sureprep</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGENTIC CORNER -->
+    <div>
+      <div class="section-wrap" style="margin-top:0; padding-top:20px;">
+        <span class="section-head">◼ The Agentic Corner</span>
+        <div class="agentic-card" style="margin-top:16px;">
+          <div class="agentic-title">OpenAI @Finances Agent — The Intuit Move to Watch</div>
+          <div class="agentic-body">
+            <strong>OpenAI's</strong> new personal finance agent — launched May 15 via Plaid for ChatGPT Pro — is consumer-facing today, but the Intuit integration on its roadmap is what changes the practitioner equation. Once live, a user will be able to ask ChatGPT "what's the tax impact of selling my Apple shares this year?" and receive a grounded, account-aware answer. The agent architecture is read-only, context-persistent ("Financial memories"), and built on <strong>GPT-5.5</strong>'s improved contextual reasoning. The deployment model is direct-to-consumer, but the eventual API surface opens a platform play.
+          </div>
+          <div class="agentic-strategic">
+            <strong>Strategic Read</strong>
+            The Intuit + Plaid + GPT-5.5 stack is effectively a real-time tax context engine — if you're building a client-facing advisory product, the question is whether you build on top of this infrastructure or build a differentiated vertical alternative. The former is faster; the latter is defensible.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- REGULATORY RADAR -->
+  <div class="section-wrap">
+    <span class="section-head">◼ Regulatory Radar</span>
+    <div style="margin-top:18px;">
+      <div class="reg-item">
+        <span class="reg-agency">IRS / GAO</span> — <span class="reg-topic">AI Enforcement Expansion:</span> The March 2026 GAO report (GAO-26-107522) confirmed 126 active IRS AI applications across audit selection, fraud detection, and taxpayer services — with AI now screening large partnership returns ($10M+ assets), mid-market corporate returns, and individual returns. Senate testimony confirmed a 12% enforcement revenue increase despite 25% workforce reduction. <em>No formal rule change; this is operational deployment, not regulatory guidance. Effective: Ongoing.</em>
+      </div>
+      <div class="reg-item">
+        <span class="reg-agency">Colorado Legislature</span> — <span class="reg-topic">Colorado AI Act (CAIA) — Effective June 30, 2026:</span> The Consumer Protections for Artificial Intelligence Act takes effect in 30 days, placing obligations on deployers and developers of high-risk AI systems affecting financial services, employment, and legal services — which likely captures AI-assisted tax and advisory tools deployed in Colorado. CPA firms using AI tools in-state should review whether their technology vendors have documented their CAIA compliance posture. <em>Effective: June 30, 2026.</em>
+      </div>
+      <div class="reg-item">
+        <span class="reg-agency">AICPA ENGAGE 2026</span> — <span class="reg-topic">Monitoring:</span> Conference runs June 8–11. Expected to surface formal AI ethics guidance, practice standards updates, and possibly a white paper on practitioner AI responsibility. No formal guidance issued yet — watch for post-conference publications.
+      </div>
+    </div>
+  </div>
+
+  <!-- RESOURCE -->
+  <div class="section-wrap">
+    <span class="section-head">◼ Resource of the Day</span>
+    <div class="resource-box" style="margin-top:18px;">
+      <div class="resource-title">Thomson Reuters 2026 AI in Professional Services Report</div>
+      <div class="resource-type">Report · Thomson Reuters Institute</div>
+      <div class="resource-body">Drawing on perspectives from more than 1,500 professionals across legal, tax, accounting, risk, fraud, and government sectors, this year's edition documents where GenAI and agentic AI are gaining real production traction — not just experimentation — and maps how business models and professional expectations are shifting as AI becomes embedded in daily workflows. You'll walk away with a data-grounded picture of which AI use cases are generating measurable ROI today, which are stalling at the pilot phase, and what the firms pulling ahead are doing differently. Especially valuable for the founder lens: the report identifies the specific workflow categories where practitioners are most willing to pay for AI-driven outcomes — which is a cleaner market signal than any pitch deck analysis.</div>
+      <a class="resource-link" href="https://www.thomsonreuters.com/en/reports/ai-in-professional-services-report-2026.html" target="_blank">→ thomsonreuters.com/ai-professional-services-report-2026</a>
+    </div>
+  </div>
+
+  <!-- EDITOR'S DISPATCH -->
+  <div class="section-wrap">
+    <span class="section-head">◼ Editor's Dispatch — Quick Takes</span>
+    <div style="margin-top:18px;">
+
+      <div class="dispatch-item">
+        <div class="dispatch-em">—</div>
+        <div><strong>The Colorado AI Act is 30 days away and most CPA firms have no idea.</strong> Effective June 30, 2026, CAIA places compliance obligations on deployers of high-risk AI in financial services — which is almost certainly how an AI tax preparation or advisory tool used in Colorado would be classified. If you're a firm using AI tools with Colorado clients, or a founder whose product will be deployed in Colorado, the clock is running. The documentation and impact assessment requirements under CAIA are not trivial, and your software vendors may not proactively surface their compliance status.</div>
+      </div>
+
+      <div class="dispatch-item">
+        <div class="dispatch-em">—</div>
+        <div><strong>"Fiduciary-Grade AI" is the competitive framing that will define the next two years in professional services AI.</strong> Thomson Reuters coined the term, but the concept belongs to whoever can operationalize it credibly. If you're building a tax or advisory AI product, your architecture decisions today — audit trails, sourcing, human-in-the-loop review points, confidence scoring — are your fiduciary-grade answer. Build them now or retrofit them later at significant cost.</div>
+      </div>
+
+      <div class="dispatch-item">
+        <div class="dispatch-em">—</div>
+        <div><strong>The IRS AI enforcement asymmetry is now the most underappreciated risk in tax practice.</strong> Practitioners are deploying AI to prepare returns faster. The IRS is deploying AI to examine them more precisely. The productivity gains on the preparation side mean nothing if the defensibility of positions hasn't kept pace. The practitioners who will thrive are those who use AI to prepare <em>and</em> to stress-test — not just to produce output faster.</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <strong>AI Intel</strong> · Est. 2025 · Next edition tomorrow ·
+  Tip line: ask a follow-up in this thread ·
+  All editions AI-generated — verify before acting professionally.
+</footer>
+
+</body>
+</html>
