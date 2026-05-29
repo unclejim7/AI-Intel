@@ -5,74 +5,98 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Intel — Archive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #f5f0e8;
-    --paper: #0f0e0c;
-    --rule: #2a2520;
+    --bg: #0d0f12;
+    --surface: #141720;
+    --card: #1c2030;
+    --border: #2a2e40;
+    --text: #e8e4d8;
+    --muted: #7a7a8a;
     --accent: #c0392b;
-    --accent2: #4a90b8;
-    --muted: #8a8278;
-    --card: #1a1815;
-    --border: #2e2b27;
+    --accent-light: #e74c3c;
+    --gold: #c9a84c;
+    --link: #7ab8d4;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-size: 15px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
     min-height: 100vh;
   }
 
-  .arch-nav {
-    background: #0a0908;
+  /* TOP NAV */
+  .top-nav {
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 10px 32px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
+    padding: 12px 40px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
   }
-  .arch-nav a { color: var(--accent2); text-decoration: none; }
-  .arch-nav a:hover { color: var(--ink); }
-
-  .arch-masthead {
-    text-align: center;
-    padding: 48px 24px 32px;
-    border-bottom: 1px solid var(--border);
+  .top-nav a {
+    color: var(--link);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
   }
-  .arch-pub {
+  .top-nav a:hover { color: #fff; }
+  .top-nav .brand {
     font-family: 'Playfair Display', serif;
-    font-size: 56px;
-    font-weight: 900;
-    letter-spacing: -1px;
-    color: var(--ink);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
   }
-  .arch-sub {
+
+  /* HERO */
+  .hero {
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 36px;
+    background: linear-gradient(135deg, #0d0f12 0%, #141c28 100%);
+  }
+  .hero-label {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .hero-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
     color: var(--muted);
-    margin-top: 8px;
   }
 
-  .arch-body {
-    max-width: 800px;
+  /* CONTENT */
+  .content {
+    max-width: 780px;
     margin: 0 auto;
-    padding: 40px 24px 80px;
+    padding: 40px 40px 80px;
   }
 
+  /* MONTH GROUP */
   .month-group { margin-bottom: 40px; }
   .month-label {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
+    font-size: 10px;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--muted);
     border-bottom: 1px solid var(--border);
@@ -80,122 +104,179 @@
     margin-bottom: 16px;
   }
 
-  .edition-entry {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 20px;
+  /* EDITION CARD */
+  .edition-card {
     background: var(--card);
     border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    padding: 16px 20px;
     margin-bottom: 8px;
-    gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s, background 0.2s;
   }
-  .edition-entry:hover { border-color: var(--muted); }
-  .ed-date {
+  .edition-card:hover {
+    border-color: var(--accent);
+    background: #1f2535;
+  }
+  .edition-card.latest {
+    border-left-color: var(--gold);
+  }
+  .edition-date {
     font-family: 'Playfair Display', serif;
     font-size: 17px;
     font-weight: 700;
-    color: var(--ink);
-    flex: 0 0 auto;
+    color: var(--text);
   }
-  .ed-day {
+  .edition-day {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
     color: var(--muted);
     margin-top: 2px;
   }
-  .ed-badge {
+  .edition-badges { display:flex; align-items:center; gap:12px; }
+  .badge-latest {
+    background: var(--gold);
+    color: #0d0f12;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    padding: 3px 8px;
+    font-weight: 500;
+  }
+  .read-btn {
+    display: inline-block;
     background: var(--accent);
     color: #fff;
-    padding: 3px 8px;
-    flex: 0 0 auto;
-  }
-  .ed-num {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    flex: 1;
-  }
-  .ed-read {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent2);
+    letter-spacing: 0.1em;
+    padding: 7px 16px;
     text-decoration: none;
-    border: 1px solid var(--accent2);
-    padding: 5px 14px;
-    flex: 0 0 auto;
-    transition: background 0.15s, color 0.15s;
+    transition: background 0.2s;
   }
-  .ed-read:hover { background: var(--accent2); color: var(--paper); }
+  .read-btn:hover { background: var(--accent-light); }
 
-  .footer-arch {
-    text-align: center;
+  /* FOOTER */
+  .arch-footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 40px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.1em;
     color: var(--muted);
-    border-top: 1px solid var(--border);
-    padding: 20px;
+    letter-spacing: 0.05em;
+    text-align: center;
   }
 </style>
 </head>
 <body>
 
-<div class="arch-nav">
+<nav class="top-nav">
+  <span class="brand">AI INTEL</span>
   <a href="index.html">← Today's Edition</a>
-  <span style="color:var(--muted);">AI INTEL · ARCHIVE</span>
-  <span style="color:var(--muted);">Est. 2025</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Complete Edition Archive</div>
+  <div class="hero-title">ARCHIVE</div>
+  <div class="hero-sub">AI × Accounting &amp; Finance Intelligence &nbsp;·&nbsp; Est. 2025</div>
 </div>
 
-<div class="arch-masthead">
-  <div class="arch-pub">AI INTEL</div>
-  <div class="arch-sub">Complete Edition Archive · AI × Accounting &amp; Finance Intelligence</div>
-</div>
+<div class="content">
 
-<div class="arch-body">
-
-  <!-- MAY 2026 -->
   <div class="month-group">
     <div class="month-label">May 2026</div>
 
-    <!-- Edition 2 — Latest -->
-    <div class="edition-entry">
+    <div class="edition-card latest">
       <div>
-        <div class="ed-date">May 29, 2026</div>
-        <div class="ed-day">Friday</div>
+        <div class="edition-date">May 29, 2026</div>
+        <div class="edition-day">Friday — Edition No. 8</div>
       </div>
-      <div class="ed-num">Edition No. 2</div>
-      <div class="ed-badge">Latest</div>
-      <a class="ed-read" href="2026-05-29.html">Read →</a>
+      <div class="edition-badges">
+        <span class="badge-latest">Latest</span>
+        <a class="read-btn" href="2026-05-29.html">Read →</a>
+      </div>
     </div>
 
-    <!-- Edition 1 -->
-    <div class="edition-entry">
+    <div class="edition-card">
       <div>
-        <div class="ed-date">May 28, 2026</div>
-        <div class="ed-day">Thursday</div>
+        <div class="edition-date">May 28, 2026</div>
+        <div class="edition-day">Thursday — Edition No. 7</div>
       </div>
-      <div class="ed-num">Edition No. 1</div>
-      <div></div>
-      <a class="ed-read" href="2026-05-28.html">Read →</a>
+      <div class="edition-badges">
+        <a class="read-btn" href="2026-05-28.html">Read →</a>
+      </div>
+    </div>
+
+    <div class="edition-card">
+      <div>
+        <div class="edition-date">May 27, 2026</div>
+        <div class="edition-day">Wednesday — Edition No. 6</div>
+      </div>
+      <div class="edition-badges">
+        <a class="read-btn" href="2026-05-27.html">Read →</a>
+      </div>
+    </div>
+
+    <div class="edition-card">
+      <div>
+        <div class="edition-date">May 23, 2026</div>
+        <div class="edition-day">Saturday — Edition No. 5</div>
+      </div>
+      <div class="edition-badges">
+        <a class="read-btn" href="2026-05-23.html">Read →</a>
+      </div>
+    </div>
+
+    <div class="edition-card">
+      <div>
+        <div class="edition-date">May 21, 2026</div>
+        <div class="edition-day">Thursday — Edition No. 4</div>
+      </div>
+      <div class="edition-badges">
+        <a class="read-btn" href="2026-05-21.html">Read →</a>
+      </div>
+    </div>
+
+    <div class="edition-card">
+      <div>
+        <div class="edition-date">May 19, 2026</div>
+        <div class="edition-day">Tuesday — Edition No. 3</div>
+      </div>
+      <div class="edition-badges">
+        <a class="read-btn" href="2026-05-19.html">Read →</a>
+      </div>
+    </div>
+
+    <div class="edition-card">
+      <div>
+        <div class="edition-date">May 15, 2026</div>
+        <div class="edition-day">Friday — Edition No. 2</div>
+      </div>
+      <div class="edition-badges">
+        <a class="read-btn" href="2026-05-15.html">Read →</a>
+      </div>
+    </div>
+
+    <div class="edition-card">
+      <div>
+        <div class="edition-date">May 13, 2026</div>
+        <div class="edition-day">Wednesday — Edition No. 1 — First Edition</div>
+      </div>
+      <div class="edition-badges">
+        <a class="read-btn" href="2026-05-13.html">Read →</a>
+      </div>
     </div>
 
   </div>
 
 </div>
 
-<div class="footer-arch">
-  AI Intel · Est. 2025 · All editions AI-generated — verify before acting professionally.
+<div class="arch-footer">
+  AI Intel · Est. 2025 · All editions AI-generated. Verify before acting professionally. · unclejim7.github.io/ai-intel
 </div>
 
 </body>
